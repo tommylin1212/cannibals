@@ -19,27 +19,27 @@ class Agent:
         moves = []
         if cur.state[0] == "L":
             if cur.state[1] > 0 and cur.state[2] > 0:
-                moves.append(Node(["R", cur.state[1] - 1, cur.state[2] - 1, cur.state[3] + 1, cur.state[4] + 1], cur))
+                moves.append(Node(["R", cur.state[1] - 1, cur.state[2] - 1, cur.state[3] + 1, cur.state[4] + 1], cur, "MRCR"))
             if cur.state[2] > 0:
-                moves.append(Node(["R", cur.state[1], cur.state[2] - 1, cur.state[3], cur.state[4] + 1], cur))
+                moves.append(Node(["R", cur.state[1], cur.state[2] - 1, cur.state[3], cur.state[4] + 1], cur, "CR"))
             if cur.state[1] > 0:
-                moves.append(Node(["R", cur.state[1] - 1, cur.state[2], cur.state[3] + 1, cur.state[4]], cur))
+                moves.append(Node(["R", cur.state[1] - 1, cur.state[2], cur.state[3] + 1, cur.state[4]], cur, "MR"))
             if cur.state[2] >= 2:
-                moves.append(Node(["R", cur.state[1], cur.state[2] - 2, cur.state[3], cur.state[4] + 2], cur))
+                moves.append(Node(["R", cur.state[1], cur.state[2] - 2, cur.state[3], cur.state[4] + 2], cur, "CRCR"))
             if cur.state[1] >= 2:
-                moves.append(Node(["R", cur.state[1] - 2, cur.state[2], cur.state[3] + 2, cur.state[4]], cur))
+                moves.append(Node(["R", cur.state[1] - 2, cur.state[2], cur.state[3] + 2, cur.state[4]], cur, "MRMR"))
 
         else:
             if cur.state[3] > 0 and cur.state[4] > 0:
-                moves.append(Node(["L", cur.state[1] + 1, cur.state[2] + 1, cur.state[3] - 1, cur.state[4] - 1], cur))
+                moves.append(Node(["L", cur.state[1] + 1, cur.state[2] + 1, cur.state[3] - 1, cur.state[4] - 1], cur, "MLCL"))
             if cur.state[4] > 0:
-                moves.append(Node(["L", cur.state[1], cur.state[2] + 1, cur.state[3], cur.state[4] - 1], cur))
+                moves.append(Node(["L", cur.state[1], cur.state[2] + 1, cur.state[3], cur.state[4] - 1], cur, "CL"))
             if cur.state[3] > 0:
-                moves.append(Node(["L", cur.state[1] + 1, cur.state[2], cur.state[3] - 1, cur.state[4]], cur))
+                moves.append(Node(["L", cur.state[1] + 1, cur.state[2], cur.state[3] - 1, cur.state[4]], cur, "ML"))
             if cur.state[4] >= 2:
-                moves.append(Node(["L", cur.state[1], cur.state[2] + 2, cur.state[3], cur.state[4] - 2], cur))
+                moves.append(Node(["L", cur.state[1], cur.state[2] + 2, cur.state[3], cur.state[4] - 2], cur, "CLCL"))
             if cur.state[3] >= 2:
-                moves.append(Node(["L", cur.state[1] + 2, cur.state[2], cur.state[3] - 2, cur.state[4]], cur))
+                moves.append(Node(["L", cur.state[1] + 2, cur.state[2], cur.state[3] - 2, cur.state[4]], cur, "MLML"))
 
         for node in moves:
             if node.state[1] != 0 and node.state[3] != 0:
