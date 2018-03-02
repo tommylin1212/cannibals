@@ -4,12 +4,19 @@ from node import Node
 
 
 class Agent:
-    def __init__(self):
+    def __init__(self, missionaries, cannibals):
+        # actually turns out that with boat size 2, 3 pairs is the most
+        self.missionaries = missionaries
+        if self.missionaries < 3:
+            self.missionaries = 3
+        self.cannibals = cannibals
+        if self.cannibals < 3:
+            self.cannibals = 3
         self.front = Frontier([])
         self.explored_set = Explored([])
-        self.start_node = Node(["L", 3, 3, 0, 0], None,"START")
+        self.start_node = Node(["L", missionaries, cannibals, 0, 0], None, "START")
         self.front.add(self.start_node)
-        self.goal = Node(["R", 0, 0, 3, 3], None, "")
+        self.goal = Node(["R", 0, 0, missionaries, cannibals], None, "")
 
     @staticmethod
     def cmp(node1, node2):
@@ -19,26 +26,28 @@ class Agent:
         moves = []
         if cur.state[0] == "L":
             if cur.state[1] > 0 and cur.state[2] > 0:
-                moves.append(Node(["R", cur.state[1] - 1, cur.state[2] - 1, cur.state[3] + 1, cur.state[4] + 1], cur, "MRCR"))
+                moves.append(
+                    Node(["R", cur.state[1] - 1, cur.state[2] - 1, cur.state[3] + 1, cur.state[4] + 1], cur, "MRCR"))
             if cur.state[2] > 0:
                 moves.append(Node(["R", cur.state[1], cur.state[2] - 1, cur.state[3], cur.state[4] + 1], cur, "CR"))
             if cur.state[1] > 0:
                 moves.append(Node(["R", cur.state[1] - 1, cur.state[2], cur.state[3] + 1, cur.state[4]], cur, "MR"))
-            if cur.state[2] >= 2:
+            if cur.state[2] >= self.cannibals - 1:
                 moves.append(Node(["R", cur.state[1], cur.state[2] - 2, cur.state[3], cur.state[4] + 2], cur, "CRCR"))
-            if cur.state[1] >= 2:
+            if cur.state[1] >= self.missionaries - 1:
                 moves.append(Node(["R", cur.state[1] - 2, cur.state[2], cur.state[3] + 2, cur.state[4]], cur, "MRMR"))
 
         else:
             if cur.state[3] > 0 and cur.state[4] > 0:
-                moves.append(Node(["L", cur.state[1] + 1, cur.state[2] + 1, cur.state[3] - 1, cur.state[4] - 1], cur, "MLCL"))
+                moves.append(
+                    Node(["L", cur.state[1] + 1, cur.state[2] + 1, cur.state[3] - 1, cur.state[4] - 1], cur, "MLCL"))
             if cur.state[4] > 0:
                 moves.append(Node(["L", cur.state[1], cur.state[2] + 1, cur.state[3], cur.state[4] - 1], cur, "CL"))
             if cur.state[3] > 0:
                 moves.append(Node(["L", cur.state[1] + 1, cur.state[2], cur.state[3] - 1, cur.state[4]], cur, "ML"))
-            if cur.state[4] >= 2:
+            if cur.state[4] >= self.cannibals - 1:
                 moves.append(Node(["L", cur.state[1], cur.state[2] + 2, cur.state[3], cur.state[4] - 2], cur, "CLCL"))
-            if cur.state[3] >= 2:
+            if cur.state[3] >= self.missionaries - 1:
                 moves.append(Node(["L", cur.state[1] + 2, cur.state[2], cur.state[3] - 2, cur.state[4]], cur, "MLML"))
 
         for node in moves:
