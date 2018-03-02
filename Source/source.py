@@ -1,4 +1,9 @@
-from Source.node import Node
+from Source.agent import Agent
 
-a = Node(["R", 3, 3, 0, 0])
-a.print_n()
+a = Agent()
+answer = a.search()
+if answer is not None:
+    print("Answer: ")
+    answer.print_p()
+else:
+    print("No solution")
