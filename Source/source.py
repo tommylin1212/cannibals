@@ -1,7 +1,7 @@
 from Source.agent import Agent
 
-a = Agent()
-answer = a.search()
+agent = Agent()
+answer = agent.search()
 if answer is not None:
     print("Answer: ")
     answer.print_p()

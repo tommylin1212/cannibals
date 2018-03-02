@@ -1,28 +1,28 @@
 class Frontier:
-    fron = []
+    frontier = []
 
     @staticmethod
-    def cmp(a, b):
-        return (a > b) - (a < b)
+    def cmp(state1, state2):
+        return (state1 > state2) - (state1 < state2)
 
-    def __init__(self, a):
-        self.fron = a
+    def __init__(self, test_node):
+        self.frontier = test_node
 
-    def check(self, a):
-        for node in self.fron:
-            if self.cmp(a.state, node.state) == 0:
+    def check(self, test_node):
+        for node in self.frontier:
+            if self.cmp(test_node.state, node.state) == 0:
                 return True
         return False
 
-    def add(self, a):
-        self.fron.append(a)
+    def add(self, test_node):
+        self.frontier.append(test_node)
 
     def front(self):
-        x = self.fron[0]
-        self.fron = [n for n in self.fron if self.cmp(n.state, x.state) != 0]
-        return x
+        front_node = self.frontier[0]
+        self.frontier = [test_node for test_node in self.frontier if self.cmp(test_node.state, front_node.state) != 0]
+        return front_node
 
     def print_n(self):
         print("Frontier: ")
-        for node in self.fron:
+        for node in self.frontier:
             node.print_n()

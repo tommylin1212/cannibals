@@ -2,9 +2,9 @@ class Node:
     state = []
     parent = None
 
-    def __init__(self, a, p):
-        self.state = a
-        self.parent = p
+    def __init__(self, state, parent):
+        self.state = state
+        self.parent = parent
 
     def print_n(self):
         print("state:", self.state)
