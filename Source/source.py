@@ -1,4 +1,4 @@
-from Source.agent import Agent
+from agent import Agent
 
 agent = Agent()
 answer = agent.search()

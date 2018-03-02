@@ -1,6 +1,6 @@
-from Source.exset import Explored
-from Source.frontier import Frontier
-from Source.node import Node
+from exset import Explored
+from frontier import Frontier
+from node import Node
 
 
 class Agent:
