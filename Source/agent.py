@@ -7,9 +7,9 @@ class Agent:
     def __init__(self):
         self.front = Frontier([])
         self.explored_set = Explored([])
-        self.start_node = Node(["L", 3, 3, 0, 0], None)
+        self.start_node = Node(["L", 3, 3, 0, 0], None,"START")
         self.front.add(self.start_node)
-        self.goal = Node(["R", 0, 0, 3, 3], None)
+        self.goal = Node(["R", 0, 0, 3, 3], None, "")
 
     @staticmethod
     def cmp(node1, node2):
